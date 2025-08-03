@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://redmesastudios.com/?sitemapindex.xml
+Sitemap: https://redmesastudios.com/?sitemap497.xml
+Sitemap: https://redmesastudios.com/?sitemap695.xml
+Sitemap: https://redmesastudios.com/?sitemap468.xml
+Sitemap: https://redmesastudios.com/?sitemap499.xml
+Sitemap: https://redmesastudios.com/?sitemap444.xml
+Sitemap: https://redmesastudios.com/pages.php?sitemap832.xml
