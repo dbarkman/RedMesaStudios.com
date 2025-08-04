@@ -27,7 +27,7 @@ class ContactController extends Controller
         }
 
         return response()->json([
-            'message' => 'Your message has been received and is being processed.'
+            'message' => 'Thank you for your message! We will be in touch soon.'
         ], 202);
     }
 }

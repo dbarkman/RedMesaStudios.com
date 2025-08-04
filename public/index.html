@@ -10,6 +10,11 @@
     <link rel="icon" href="images/logo-small.png" sizes="32x32" />
     <link rel="icon" href="images/logo-small.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="images/logo-small.png" />
+    <style>
+        #form-feedback {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
 </head>
 
 <body class="home blog">
@@ -180,14 +185,14 @@ Exceptional Apps</h1>
 
             submitButton.disabled = true;
             feedbackEl.style.display = 'none';
+            feedbackEl.style.opacity = 1; // Reset opacity
             feedbackEl.textContent = '';
 
-            fetch('/api/contact', {
+            fetch('/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer 1|N9CHPPUtCa6B5LikqWVUershqo0TGmTQR6Obuwo57242c617'
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(data)
             })
@@ -201,6 +206,13 @@ Exceptional Apps</h1>
                 feedbackEl.textContent = result.message || 'Your message has been sent successfully!';
                 feedbackEl.style.color = 'green';
                 form.reset();
+                setTimeout(() => {
+                    feedbackEl.style.opacity = 0;
+                    // Wait for the transition to finish before hiding
+                    setTimeout(() => {
+                        feedbackEl.style.display = 'none';
+                    }, 500); // 0.5s transition
+                }, 4500); // Start fading after 4.5 seconds
             })
             .catch(error => {
                 feedbackEl.textContent = 'Error: ' + error.message;

@@ -22,6 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'client.active' => \App\Http\Middleware\EnsureClientIsActive::class,
             'ip.banned' => \App\Http\Middleware\CheckForBannedIp::class,
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'contact',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

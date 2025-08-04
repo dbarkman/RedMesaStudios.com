@@ -1,0 +1,14 @@
+[Unit]
+Description=Red Mesa Studios Queue Worker
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/php /var/www/html/redmesastudios.com/artisan queue:work --delay=10 --tries=3 --timeout=60
+Restart=always
+RestartSec=10
+User=apache
+Group=apache
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
