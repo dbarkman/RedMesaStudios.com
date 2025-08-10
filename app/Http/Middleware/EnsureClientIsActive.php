@@ -16,11 +16,11 @@ class EnsureClientIsActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            $client = Auth::user()->tokenable; // Access the ApiClient model via the token relationship
-            if ($client && $client->status !== 'active') {
-                return response()->json(['message' => 'Client is not active.'], 403);
-            }
+        // When authenticating with Sanctum personal access tokens,
+        // the authenticated user is the tokenable model (ApiClient).
+        $client = $request->user();
+        if ($client && $client->status !== 'active') {
+            return response()->json(['message' => 'Client is not active.'], 403);
         }
 
         return $next($request);

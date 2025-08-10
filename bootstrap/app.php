@@ -23,9 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'ip.banned' => \App\Http\Middleware\CheckForBannedIp::class,
         ]);
 
-        $middleware->validateCsrfTokens(except: [
-            'contact',
-        ]);
+        // Use standard CSRF protection for web routes
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -26,34 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
-            $ip = $request->ip();
-            $deniedIp = DeniedIp::where('ip_address', $ip)->first();
-
-            if ($deniedIp && $deniedIp->banned_until && $deniedIp->banned_until->isFuture()) {
-                return Limit::none()->response(fn () => response('Your IP is temporarily banned.', 429));
-            }
-
-            $key = 'rate-limiter:' . $ip;
-            $limit = Limit::perMinute(60)->by($ip);
-
-            if (RateLimiter::tooManyAttempts($key, 60)) {
-                $offenseCount = optional($deniedIp)->offense_count ?? 0;
-                $offenseCount++;
-
-                $banDuration = match ($offenseCount) {
-                    1 => now()->addHour(),
-                    2 => now()->addHours(6),
-                    3 => now()->addHours(12),
-                    default => now()->addYears(100),
-                };
-
-                DeniedIp::updateOrCreate(
-                    ['ip_address' => $ip],
-                    ['offense_count' => $offenseCount, 'banned_until' => $banDuration]
-                );
-            }
-
-            return $limit;
+            // Standard Laravel throttling: 60 req/min by client IP
+            return Limit::perMinute(60)->by($request->ip());
         });
     }
 }
