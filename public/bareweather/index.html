@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>BareWeather for iOS – Simple. Beautiful. No ads, ever.</title>
+	<link rel="icon" href="../images/logo-small.png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <header class="site-header">
+        <h1 class="site-title" id="headerTitle">
+            <a href="../index.html">Red Mesa Studios</a>
+        </h1>
+        
+        <nav class="main-navigation">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                <span class="menu-toggle-icon"></span>
+            </button>
+            
+            <ul id="primary-menu" class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#cta">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+	<main>
+		<section class="hero" id="home">
+			<div class="container hero-inner">
+				<div class="hero-copy">
+					<h1>BareWeather</h1>
+					<p class="tag">Simple. Beautiful. No ads, ever.</p>
+					<ul class="bullets">
+						<li>Current conditions at a glance</li>
+						<li>10‑day forecast</li>
+						<li>Detailed daily stats</li>
+						<li>24‑hour forecast for each day</li>
+					</ul>
+					<div class="cta-group" id="download">
+						<a class="btn primary" href="https://testflight.apple.com/join/pBRVz9hD" rel="noopener" target="_blank">Get the TestFlight Beta</a>
+						<a class="btn" href="#screenshots">Screenshots</a>
+					</div>
+				</div>
+				<div class="hero-shot">
+					<img src="images/hero-phone.png" alt="BareWeather iPhone preview" onerror="this.style.display='none'" />
+				</div>
+			</div>
+		</section>
+
+		<section id="features" class="features">
+			<div class="container grid-3">
+				<div class="card">
+					<h3>Clean by design</h3>
+					<p>Purpose‑built to surface what you need right now without clutter. Typography and spacing do the heavy lifting.</p>
+				</div>
+				<div class="card">
+					<h3>Actionable forecasts</h3>
+					<p>Plan ahead with a crisp 10‑day view and an hour‑by‑hour forecast for each day.</p>
+				</div>
+				<div class="card">
+					<h3>No ads, ever</h3>
+					<p>BareWeather respects your attention. Focus on the weather, not the noise.</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="screenshots" class="screens">
+			<div class="container">
+				<h2>Screenshots</h2>
+				<p class="sub">Tap any image to view larger.</p>
+				<div class="shot-grid">
+					<!-- App UI (10) -->
+					<a class="shot" href="images/app-02.PNG"><img src="images/app-02.PNG" alt="Daily details" /></a>
+					<a class="shot" href="images/app-08.PNG"><img src="images/app-08.PNG" alt="Daily summary" /></a>
+					<a class="shot" href="images/app-03.PNG"><img src="images/app-03.PNG" alt="Hourly forecast" /></a>
+					<a class="shot" href="images/app-09.PNG"><img src="images/app-09.PNG" alt="Visibility card" /></a>
+					<a class="shot" href="images/app-01.PNG"><img src="images/app-01.PNG" alt="Current conditions" /></a>
+					<a class="shot" href="images/app-04.PNG"><img src="images/app-04.PNG" alt="10‑day forecast" /></a>
+					<a class="shot" href="images/app-05.PNG"><img src="images/app-05.PNG" alt="Weather alert" /></a>
+					<a class="shot" href="images/app-06.PNG"><img src="images/app-06.PNG" alt="Share sheet" /></a>
+					<a class="shot" href="images/app-07.PNG"><img src="images/app-07.PNG" alt="Locations list" /></a>
+					<a class="shot" href="images/app-10.PNG"><img src="images/app-10.PNG" alt="Humidity / Dew point" /></a>
+				</div>
+			</div>
+		</section>
+
+        <section id="cta" class="cta-final">
+			<div class="container">
+				<h2>Ready for better weather?</h2>
+				<p>Download BareWeather on your iPhone and get a clean forecast—fast.</p>
+				<a class="btn primary" href="https://testflight.apple.com/join/pBRVz9hD" rel="noopener" target="_blank">Get the TestFlight Beta</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container footer-inner">
+			<div>© 2025 Red Mesa Studios</div>
+			<nav>
+				<a href="../legal/terms-of-use.html">Terms</a>
+				<a href="../legal/privacy-policy.html">Privacy</a>
+			</nav>
+		</div>
+	</footer>
+
+	<!-- Lightweight lightbox -->
+	<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
+		<button class="lightbox-close" aria-label="Close" onclick="closeLightbox()">×</button>
+		<img id="lightbox-img" alt="Screenshot" />
+	</div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-migrate.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // Swap header title from Red Mesa Studios to BareWeather when hero title scrolls under header
+        (function(){
+            const header = document.querySelector('.site-header');
+            const titleLink = document.querySelector('#headerTitle a');
+            const heroTitle = document.querySelector('.hero-copy h1');
+            if(!header || !titleLink || !heroTitle) return;
+            const observer = new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        // Hero title visible
+                        titleLink.textContent = 'Red Mesa Studios';
+                        titleLink.setAttribute('href','../index.html');
+                    } else {
+                        // Hero title scrolled under header
+                        titleLink.textContent = 'BareWeather';
+                        titleLink.setAttribute('href','#home');
+                    }
+                });
+            }, { root: null, threshold: 0, rootMargin: '-80px 0px 0px 0px' });
+            observer.observe(heroTitle);
+        })();
+    </script>
+</body>
+</html>
